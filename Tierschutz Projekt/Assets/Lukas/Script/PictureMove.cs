@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class PictureMove : MonoBehaviour
@@ -23,13 +24,13 @@ public class PictureMove : MonoBehaviour
     Vector2 bigrightup = new Vector2(2.7f, 2.5f);
     Vector2 bigrightdown = new Vector2(2.7f, -2.5f);
 
-    public Picturedatabase picturedatabase = new Picturedatabase();
+    public Picturedatabase picturedatabase;
     GameObject newPicture;
     bool mouseindonw = false;
     float speed = 1f;
     private void Awake()
     {
-        picturedatabase = FindObjectOfType<Picturedatabase>();
+        picturedatabase = GetComponent<Picturedatabase>();
         createPicture();
     }
     
@@ -53,40 +54,27 @@ public class PictureMove : MonoBehaviour
 
     void createPicture()
     {
-        int i = 0;
-        foreach (Picture picture in picturedatabase.pictureList)
-        {
-            GameObject newPicture = new GameObject(picture.name);
-            newPicture.name = picture.name; // Set the name of the GameObject to the name of the picture
-            SpriteRenderer sr = newPicture.AddComponent<SpriteRenderer>();
-            newPicture.AddComponent<Picturestartposition>();
-            sr.sprite = picture.image;
-            if (picture.small)
-                newPicture.tag = "small";
-            else
-                newPicture.tag = "big";
-            // Set the position of the GameObject based on the size and position of the picture
-            newPicture.transform.position = picture.small ? smallLeftup : bigLeftup;
-            i++;
-        }
-        /*
         for (int i = 0; i < picturedatabase.pictureList.Count; i++)
         {
-            Picture picture = picturedatabase.Getimage("Picture" + count);
-            newPicture = new GameObject(picture.name);
-            SpriteRenderer sr = newPicture.AddComponent<SpriteRenderer>();
-            newPicture.AddComponent<Picturestartposition>();
-            sr.sprite = picture.image;
-            small = picture.small;
-            if (picture.small)
-                newPicture.tag = "small";
-            else
-                newPicture.tag = "big";
-            name = picture.name;
-            //GameObject parentObject = GameObject.Find("Canvas");
-            //newPicture.transform.SetParent(parentObject.transform);
-            count++;
-        }*/
+            Picture picture = picturedatabase.Getimage(i);
+            for (int a = 0; a < picturedatabase.pictureList.Count; a++)
+            {
+                name = picture.name;
+                newPicture = new GameObject(name);
+                SpriteRenderer sr = newPicture.AddComponent<SpriteRenderer>();
+                newPicture.AddComponent<Picturestartposition>();
+                sr.sprite = picture.image;
+                small = picture.small;
+                if (picture.small)
+                    newPicture.tag = "small";
+                else
+                    newPicture.tag = "big";
+                name = picture.name;
+                //GameObject parentObject = GameObject.Find("Canvas");
+                //newPicture.transform.SetParent(parentObject.transform);
+                count++;
+            }
+        }
     }
 
     void movePicture()

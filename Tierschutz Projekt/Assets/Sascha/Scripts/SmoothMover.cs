@@ -32,9 +32,9 @@ public class SmoothMover : MonoBehaviour
 
         if (move == true){
         transform.position = Vector2.Lerp(transform.position, middle.position, Time.deltaTime);
-        if (middle.position - transform.position <= 0.01f){
-            transform.position = middle.position;
-        }
+        //if (middle.position - transform.position <= 0.01f){
+        //    transform.position = middle.position;
+        //}
         }
     }
 

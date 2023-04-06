@@ -1,12 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Picturedatabase : MonoBehaviour
 {
     public List<Picture> pictureList = new List<Picture>();
-    public void Awake()
+    public void Start()
     {
         BuildPictureDatabase();
     }
@@ -14,7 +13,10 @@ public class Picturedatabase : MonoBehaviour
     {
         return pictureList.Find(pictureList => pictureList.name == objectname);
     }
-    
+    public Picture Getimage(int id)
+    {
+        return pictureList.Find(pictureList => pictureList.id == id);
+    }
     // false = smallpicture / true = bigpicture
 
     // small Picture Size X = 1.75f , Y = 1.25f
